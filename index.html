@@ -11,9 +11,8 @@
   // the link to your model provided by Teachable Machine export panel
   const URL = "https://teachablemachine.withgoogle.com/models/2EBBEYU7c/";
   let model, webcam, ctx, labelContainer, maxPredictions;
-  let notifyPermission = false;
 
-  function checkNotifyPermission() {
+  function notifyMe() {
     // Let's check if the browser supports notifications
     if (!("Notification" in window)) {
       alert("This browser does not support desktop notification");
@@ -22,7 +21,7 @@
     // Let's check whether notification permissions have already been granted
     else if (Notification.permission === "granted") {
       // If it's okay let's create a notification
-      notifyPermission = true;
+      var notification = new Notification("123");
     }
 
     // Otherwise, we need to ask the user for permission
@@ -30,18 +29,13 @@
       Notification.requestPermission().then(function (permission) {
         // If the user accepts, let's create a notification
         if (permission === "granted") {
-          notifyPermission = true;
+          var notification = new Notification("123");
         }
       });
     }
 
     // At last, if the user has denied notifications, and you
     // want to be respectful there is no need to bother them any more.
-  }
-
-  function notifyMe(str) {
-    let notification = new Notification(str);
-    
   }
 
   async function init() {
@@ -63,7 +57,7 @@
     await webcam.setup(); // request access to the webcam
     await webcam.play();
     window.requestAnimationFrame(loop);
-    checkNotifyPermission()
+    notifyMe();
 
     // append/get elements to the DOM
     const canvas = document.getElementById("canvas");
@@ -91,15 +85,9 @@
     const prediction = await model.predict(posenetOutput);
 
     for (let i = 0; i < maxPredictions; i++) {
-      let predVal = prediction[i].probability.toFixed(2)
       const classPrediction =
-        prediction[i].className + ": " + predVal;
+        prediction[i].className + ": " + prediction[i].probability.toFixed(2);
       labelContainer.childNodes[i].innerHTML = classPrediction;
-      if (i=1 && predVal > 0.75 && notifyPermission) {
-        console.log("gonna call notifyMe");
-        notifyMe("fix your posture! Your posture is" + predVal + "% incorrect!")
-      }
-      // console.log(predVal)
     }
 
     // finally draw the poses
