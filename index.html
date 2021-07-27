@@ -49,7 +49,7 @@
     maxPredictions = model.getTotalClasses();
 
     // Convenience function to setup a webcam
-    const size = 2000;
+    // const size = 2000;
     const flip = true; // whether to flip the webcam
     webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
     await webcam.setup(); // request access to the webcam
@@ -59,8 +59,8 @@
 
     // append/get elements to the DOM
     const canvas = document.getElementById("canvas");
-    canvas.width = size;
-    canvas.height = size;
+    canvas.width = windowWidth;
+    canvas.height = windowHeight;
     ctx = canvas.getContext("2d");
     labelContainer = document.getElementById("label-container");
     for (let i = 0; i < maxPredictions; i++) {
