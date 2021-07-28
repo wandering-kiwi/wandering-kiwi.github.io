@@ -43,7 +43,7 @@
   function notifyMe(str) {
     isNotificationShowing = true
     let notification = new Notification(str);
-    setTimeout(() => {notification.close();}, 2000)
+    setTimeout(() => {notification.close();}, 10000)
     isNotificationShowing = false
     
   }
