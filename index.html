@@ -102,7 +102,7 @@
         prediction[i].className + ": " + predVal;
       labelContainer.childNodes[i].innerHTML = classPrediction;
       if (i=1 && predVal > 0.75 && notifyPermission && !(isNotificationShowing)) {
-        console.log("gonna call notifyMe");
+        console.log(isNotificationShowing);
         notifyMe("fix your posture! Your posture is" + predVal + "% incorrect!")
       }
       // console.log(predVal)
