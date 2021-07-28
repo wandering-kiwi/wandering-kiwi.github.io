@@ -11,48 +11,29 @@
   // the link to your model provided by Teachable Machine export panel
   const URL = "https://teachablemachine.withgoogle.com/models/2EBBEYU7c/";
   let model, webcam, ctx, labelContainer, maxPredictions;
-  let notifyPermission = false;
-  let isNotificationShowing = false
 
   function checkNotifyPermission() {
-    // Let's check if the browser supports notifications
-    if (!("Notification" in window)) {
-      alert("This browser does not support desktop notification");
-    }
-
-    // Let's check whether notification permissions have already been granted
-    else if (Notification.permission === "granted") {
-      // If it's okay let's create a notification
-      notifyPermission = true;
-    }
-
-    // Otherwise, we need to ask the user for permission
-    else if (Notification.permission !== "denied") {
-      Notification.requestPermission().then(function (permission) {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          notifyPermission = true;
-        }
-      });
-    }
-
-    // At last, if the user has denied notifications, and you
-    // want to be respectful there is no need to bother them any more.
+      Notification.requestPermission((status) => {
+          console.log(status)
+      })
   }
 
   function notifyMe(str) {
-    isNotificationShowing = true
+    let notification = new Notification(str);
+    console.log(Notification.permission)
     setTimeout(() => {
-      let notification = new Notification(str);
-    })
-    setTimeout(() => {
+        console.log("2")
       notification.close();
-      isNotificationShowing = false;
-    }, 10000)
+    }, 3000)
     
   }
 
   async function init() {
+    checkNotifyPermission();
+    setTimeout(() => {
+        console.log("3")
+        notifyMe("hello world");
+    }, 3000)
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
 
@@ -71,7 +52,7 @@
     await webcam.setup(); // request access to the webcam
     await webcam.play();
     window.requestAnimationFrame(loop);
-    checkNotifyPermission()
+    // checkNotifyPermission()
 
     // append/get elements to the DOM
     const canvas = document.getElementById("canvas");
@@ -103,11 +84,6 @@
       const classPrediction =
         prediction[i].className + ": " + predVal;
       labelContainer.childNodes[i].innerHTML = classPrediction;
-      if (i=0 && predVal > 0.75 && notifyPermission && !(isNotificationShowing)) {
-        console.log(prediction[i].className);
-        notifyMe("fix your posture! Your posture is" + predVal + "% incorrect!")
-      }
-      // console.log(predVal)
     }
 
     // finally draw the poses
