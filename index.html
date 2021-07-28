@@ -12,6 +12,7 @@
   const URL = "https://teachablemachine.withgoogle.com/models/2EBBEYU7c/";
   let model, webcam, ctx, labelContainer, maxPredictions;
   let notifyPermission = false;
+  let isNotificationShowing = false
 
   function checkNotifyPermission() {
     // Let's check if the browser supports notifications
@@ -40,7 +41,10 @@
   }
 
   function notifyMe(str) {
+    isNotificationShowing = true
     let notification = new Notification(str);
+    setTimeout(() => {notification.close();}, 2000)
+    isNotificationShowing = false
     
   }
 
@@ -95,7 +99,7 @@
       const classPrediction =
         prediction[i].className + ": " + predVal;
       labelContainer.childNodes[i].innerHTML = classPrediction;
-      if (i=1 && predVal > 0.75 && notifyPermission) {
+      if (i=1 && predVal > 0.75 && notifyPermission && !(isNotificationShowing)) {
         console.log("gonna call notifyMe");
         notifyMe("fix your posture! Your posture is" + predVal + "% incorrect!")
       }
