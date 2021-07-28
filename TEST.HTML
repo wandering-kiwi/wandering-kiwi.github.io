@@ -1,14 +1,5 @@
 <button type="button" onclick="init()">Start</button>
 <script type="text/javascript">
-  // More API functions here:
-  // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
-
-  // the link to your model provided by Teachable Machine export panel
-  const URL = "https://teachablemachine.withgoogle.com/models/2EBBEYU7c/";
-  let model, webcam, ctx, labelContainer, maxPredictions;
-  let notifyPermission = false;
-  let isNotificationShowing = false
-
   function checkNotifyPermission() {
     // Let's check if the browser supports notifications
     if (!("Notification" in window)) {
@@ -36,12 +27,11 @@
   }
 
   function notifyMe(str) {
-    isNotificationShowing = true
+      console.log(Notification.permission)
     let notification = new Notification(str);
     setTimeout(() => {
         console.log("2")
       notification.close();
-      isNotificationShowing = false;
     }, 3000)
     
   }
