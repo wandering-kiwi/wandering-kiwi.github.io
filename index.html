@@ -43,8 +43,10 @@
   function notifyMe(str) {
     isNotificationShowing = true
     let notification = new Notification(str);
-    setTimeout(() => {notification.close();}, 10000)
-    isNotificationShowing = false
+    setTimeout(() => {
+      notification.close();
+      isNotificationShowing = false;
+    }, 10000)
     
   }
 
@@ -99,7 +101,7 @@
       const classPrediction =
         prediction[i].className + ": " + predVal;
       labelContainer.childNodes[i].innerHTML = classPrediction;
-      if (i=1 && predVal > 0.75 && notifyPermission && (isNotificationShowing)) {
+      if (i=1 && predVal > 0.75 && notifyPermission && !(isNotificationShowing)) {
         console.log("gonna call notifyMe");
         notifyMe("fix your posture! Your posture is" + predVal + "% incorrect!")
       }
