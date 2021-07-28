@@ -1,34 +1,15 @@
-<button type="button" onclick="init()">Start</button>
+<button type="button" onclick="checkNotifyPermission()">Start</button>
+<button type="button" onclick="notifyMe('hello')">notification</button>
 <script type="text/javascript">
   function checkNotifyPermission() {
-    // Let's check if the browser supports notifications
-    if (!("Notification" in window)) {
-      alert("This browser does not support desktop notification");
-    }
-
-    // Let's check whether notification permissions have already been granted
-    else if (Notification.permission === "granted") {
-      // If it's okay let's create a notification
-      notifyPermission = true;
-    }
-
-    // Otherwise, we need to ask the user for permission
-    else if (Notification.permission !== "denied") {
-      Notification.requestPermission().then(function (permission) {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          notifyPermission = true;
-        }
-      });
-    }
-
-    // At last, if the user has denied notifications, and you
-    // want to be respectful there is no need to bother them any more.
+      Notification.requestPermission((status) => {
+          console.log(status)
+      })
   }
 
   function notifyMe(str) {
-      console.log(Notification.permission)
     let notification = new Notification(str);
+    console.log(Notification.permission)
     setTimeout(() => {
         console.log("2")
       notification.close();
