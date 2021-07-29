@@ -9,7 +9,7 @@
   // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
 
   // the link to your model provided by Teachable Machine export panel
-  const URL = "https://teachablemachine.withgoogle.com/models/2EBBEYU7c/";
+  const URL = "https://teachablemachine.withgoogle.com/models/mDvky0fyk/";
   let model, webcam, ctx, labelContainer, maxPredictions, timer;
   let isGood = true;
 
@@ -80,14 +80,14 @@
       const classPrediction =
         prediction[i].className + ": " + predVal;
       labelContainer.childNodes[i].innerHTML = classPrediction;
-      if (prediction[i].className === "left" && predVal>0.75 && isGood){
+      if (prediction[i].className === "bad" && predVal>0.75 && isGood){
         isGood = false;
         checkNotifyPermission();
         timer = setTimeout(() => {
           notifyMe("Fix your posture! it is " + predVal*100 +  "% bad");
           isGood = true;
         }, 10000);
-      } else if (prediction[i].className === "left" && predVal < 0.75) {
+      } else if (prediction[i].className === "bad" && predVal < 0.75) {
         clearTimeout(timer)
         isGood = true;
       }
