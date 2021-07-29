@@ -87,7 +87,7 @@
           console.log("Left");
           notifyMe("left");
           isGood = true;
-        }, 1000);
+        }, 10000);
       } else if (prediction[i].className === "left" && predVal < 0.75) {
         clearTimeout(timer)
         isGood = true;
