@@ -81,7 +81,9 @@
       const classPrediction =
         prediction[i].className + ": " + predVal;
       labelContainer.childNodes[i].innerHTML = classPrediction;
-      if (prediction[i].className === "left"){console.log(predVal)}
+      if (prediction[i].className === "left" && predVal>0.75){
+        console.log("LEFT!")
+      }
     }
 
     // finally draw the poses
