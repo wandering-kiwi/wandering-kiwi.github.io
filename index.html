@@ -84,8 +84,7 @@
         isGood = false;
         checkNotifyPermission();
         timer = setTimeout(() => {
-          console.log("Left");
-          notifyMe("left");
+          notifyMe("Fix your posture! it is " + predVal*100 "% bad");
           isGood = true;
         }, 10000);
       } else if (prediction[i].className === "left" && predVal < 0.75) {
