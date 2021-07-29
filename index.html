@@ -85,10 +85,7 @@
         checkNotifyPermission();
         timer = setTimeout(() => {
           console.log("Left");
-          setTimeout(() => {
-            notifyMe("left");
-          }, 3000)
-          console.log("left")
+          notifyMe("left");
           isGood = true;
         }, 1000);
       } else if (prediction[i].className === "left" && predVal < 0.75) {
