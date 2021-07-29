@@ -86,7 +86,7 @@
       if (prediction[i].className === "left" && predVal>0.75 && isGood){
         isGood = false;
         clearTimeout(timer)
-      } else {
+      } else if (prediction[i].className === "left" && predVal>0.75){
         timer = setTimeout(()=>{
           console.log("Left")
           isGood = true
