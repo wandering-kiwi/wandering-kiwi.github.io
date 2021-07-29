@@ -85,11 +85,11 @@
       labelContainer.childNodes[i].innerHTML = classPrediction;
       if (prediction[i].className === "left" && predVal>0.75 && isGood){
         isGood = false;
-        timer = setTimeout(()=>{
+        timer = setTimeout(() => {
           console.log("Left");
           isGood = true;
         }, 1000);
-      } else if (prediction[i].className === "left") {
+      } else if (prediction[i].className === "left" && predVal < 0.75) {
         clearTimeout(timer)
         isGood = true;
       }
