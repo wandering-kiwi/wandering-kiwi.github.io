@@ -1,1 +1,1 @@
-# wandering-kiwi.github.io
+This is a project I made for a competition called FLL. I then developed it further with another member of my team for this competition. The idea is that it is a website that notifies you if your posture is incorrect while you are working on your laptop using TeachableMachine for the ML, and accessing the webcam. This is still a work-in-progress, and more of a proof of concept than anything, but I will fully develop it with my own ML model in the future.
